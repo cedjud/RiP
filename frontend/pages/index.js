@@ -1,7 +1,19 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+import client from "../client";
+
+export async function getStaticProps() {
+  const categories = await client.fetch(`*[_type == 'article']`)
+  return {
+    props: {
+      categories
+    }
+  }
+}
+
+export default function Home({ categories }) {
+  console.log(categories)
   return (
     <div className={styles.container}>
       <Head>
