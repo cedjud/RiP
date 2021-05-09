@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-import client from "../client";
+import sanityClient from "../sanityClient";
+
+import PageHeader from '../components/PageHeader/PageHeader';
 
 export async function getStaticProps() {
-  const data = await client.fetch(`*[_type== 'category']`)
+  const content = await sanityClient.fetch(`*[_type== 'category']`)
 
   // const ct = data.reduce((acc, current) =>  {
   //   const type = current._type;
@@ -19,7 +21,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      content: data
+      content 
     }
   }
 }
@@ -33,23 +35,7 @@ export default function Home({ content }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Rettigherter i Psykiatrien
-        </h1>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <PageHeader />
     </div>
   )
 }
