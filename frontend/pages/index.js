@@ -1,12 +1,12 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-
 import sanityClient from "../sanityClient";
 
-import PageHeader from '../components/PageHeader/PageHeader';
+import CategoryGrid from '../components/CategoryGrid/CategoryGrid';
+import Layout from '../components/Layout/Layout';
 
 export async function getStaticProps() {
-  const content = await sanityClient.fetch(`*[_type== 'category']`)
+  const content = await sanityClient.fetch(`*[_type== 'category' && displayOnFrontPage == true]{
+    _id, slug, title, parentCategories
+  }`)
 
   // const ct = data.reduce((acc, current) =>  {
   //   const type = current._type;
@@ -27,15 +27,9 @@ export async function getStaticProps() {
 }
 
 export default function Home({ content }) {
-  console.log(content)
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Rettigherter i Psykiatrien</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <PageHeader />
-    </div>
+    <Layout>
+      <CategoryGrid categories={content}/>
+    </Layout>
   )
 }
