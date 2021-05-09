@@ -4,62 +4,40 @@ import styles from '../styles/Home.module.css'
 import client from "../client";
 
 export async function getStaticProps() {
-  const categories = await client.fetch(`*[_type == 'article']`)
+  const data = await client.fetch(`*[_type== 'category']`)
+
+  // const ct = data.reduce((acc, current) =>  {
+  //   const type = current._type;
+
+  //   if (!Array.isArray(acc[type])) {
+  //     acc[type] = [];
+  //   }
+  //   acc[type].push(current);
+
+  //   return acc;
+  // }, {})
+
   return {
     props: {
-      categories
+      content: data
     }
   }
 }
 
-export default function Home({ categories }) {
-  console.log(categories)
+export default function Home({ content }) {
+  console.log(content)
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Rettigherter i Psykiatrien</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Rettigherter i Psykiatrien
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
       <footer className={styles.footer}>
