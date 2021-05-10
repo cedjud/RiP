@@ -23,8 +23,8 @@ function ContentList({content}) {
   return (
     <section>
       <ul>
-        {content.map(content => {
-          const {_id, _type, description, title, slug } = content;
+        {content && Array.isArray(content) && content.map(content => {
+          const {_id, _type, description, title, plainTextBody } = content;
 
           return (
             <li key={_id}> 
@@ -32,6 +32,8 @@ function ContentList({content}) {
                 <a>
                   <h3>{title}</h3>
                   {description && <p>{description}</p>}
+                  {plainTextBody && <p>{plainTextBody.split(" ").slice(0, 10).join(" ")}...</p>}
+                  <span>Les mer</span>
                 </a>
               </Link>
             </li>
