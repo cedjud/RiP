@@ -23,7 +23,7 @@ export async function getStaticProps({ params }) {
   const categoryQuery = `*[_type == 'category' && slug.current == '${params.slug}'][0]{
     _id,
     title,
-    subCategories[]->{
+    subcategories[]->{
       _id,
       _type,
       title,
@@ -48,15 +48,16 @@ export async function getStaticProps({ params }) {
 }
 
 function Category({ categoryData, articleData }) {
-  const { title, subCategories } = categoryData;
+  const { title, subcategories } = categoryData;
+  console.log('subcategories : ', subcategories);
   console.log('articleData : ', articleData);
 
   return (
     <Layout title={title}>
-      {subCategories && (
+      {subcategories && (
         <>
           {/* <h3>Underkategorier:</h3> */}
-          <CategoryGrid categories={subCategories} />
+          <CategoryGrid categories={subcategories} />
           {/* <ContentList content={subCategories} /> */}
         </>
       )}
