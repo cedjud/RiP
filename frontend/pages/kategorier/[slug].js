@@ -49,8 +49,8 @@ export async function getStaticProps({ params }) {
 
 function Category({ categoryData, articleData }) {
   const { title, subcategories } = categoryData;
-  console.log('subcategories : ', subcategories);
-  console.log('articleData : ', articleData);
+  // console.log('subcategories : ', subcategories);
+  // console.log('articleData : ', articleData);
 
   return (
     <Layout title={title}>

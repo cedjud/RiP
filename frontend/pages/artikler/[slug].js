@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const groqQuery = `*[_type == 'article' && slug.current == '${params.slug}'][0]{..., "plainTextBody": pt::text(body)}`;
   const articleData = await sanityClient.fetch(groqQuery);
-  console.log('articleData : ', articleData);
+  // console.log('articleData : ', articleData);
 
   return {
     props: {
