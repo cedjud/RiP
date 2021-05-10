@@ -1,0 +1,19 @@
+.wrapper {
+  height: var(--header-height);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--padding-x);
+  position: relative;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  border-bottom: 1px solid hsla(0, 0%, 80%, 1);
+}

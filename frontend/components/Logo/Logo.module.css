@@ -1,0 +1,10 @@
+.container,
+.container * {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.container span:last-of-type {
+  font-style: italic;
+}

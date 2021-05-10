@@ -1,11 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
+import Link from "next/link";
+
+import {container, textB} from "./Logo.module.css";
 
 function Logo() {
   return (
     <Link href="/">
-      <a>
-        <h1>Rettigherter i Psykiatrien</h1>
+      <a className={container}>
+        <span className={textB}>Rettigherter</span>
+        <br />
+        <span>i Psykiatrien</span>
       </a>
     </Link>
   );
