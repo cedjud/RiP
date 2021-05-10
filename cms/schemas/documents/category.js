@@ -25,16 +25,16 @@ const category = {
       type: 'text',
     },
     {
-      name: "parentCategories",
-      title: "Parent Category",
+      name: "subcategories",
+      title: "Subcategories",
       type: "array",
       options: {
         layout: "tags"
       },
       of: [
         {
-          title: "Kategori",
-          name: "parentCategory",
+          title: "Subcategory",
+          name: "subcategory",
           type: "reference",
           to: [{ type: "category" }],
         },
