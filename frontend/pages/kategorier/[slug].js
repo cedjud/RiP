@@ -1,4 +1,5 @@
 import ContentList from "../../components/ContentList/ContentList";
+import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import Layout from "../../components/Layout/Layout";
 
 import sanityClient from "../../sanityClient";
@@ -48,19 +49,19 @@ export async function getStaticProps({ params }) {
 
 function Category({ categoryData, articleData }) {
   const { title, subCategories } = categoryData;
+  console.log('articleData : ', articleData);
 
   return (
-    <Layout>
-      <h1>{title}:</h1>
-
+    <Layout title={title}>
       {subCategories && (
         <>
-          <h3>Underkategorier:</h3>
-          <ContentList content={subCategories} />
+          {/* <h3>Underkategorier:</h3> */}
+          <CategoryGrid categories={subCategories} />
+          {/* <ContentList content={subCategories} /> */}
         </>
       )}
 
-      {articleData && (
+      {articleData && Array.isArray(articleData) && articleData.length > 0 && (
         <>
           <h3>Artikler:</h3>
           <ContentList content={articleData} />

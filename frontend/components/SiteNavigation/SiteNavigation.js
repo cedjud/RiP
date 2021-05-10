@@ -22,14 +22,14 @@ function SiteNavigation() {
       <nav className={`${navigation} ${visible ? navigationVisible : ''}`}>
         <ul>
           <li>
-            <Link href="/kategorier">
-              <a>kategorier</a>
+            <Link href="/artikler">
+              <a>Alle artikler</a>
             </Link>
           </li>
 
           <li>
-            <Link href="/artikler">
-              <a>artikler</a>
+            <Link href="/kategorier">
+              <a>Alle kategorier</a>
             </Link>
           </li>
 

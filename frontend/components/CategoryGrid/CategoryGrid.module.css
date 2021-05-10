@@ -1,0 +1,54 @@
+.wrapper {
+  padding-top: var(--padding-y);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.container li {
+  font-size: 2rem;
+}
+
+.container li a {
+  display: block;
+
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  font-weight: 400;
+  color: white;
+
+  background-color: hsla(0, 75%, 40%, 1);
+  transition: background-color 200ms ease-in-out;
+}
+
+.container li a h2 {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.container li a p {
+  margin: 1rem 0 0;
+  text-decoration: none;
+}
+
+.container li a:hover {
+  text-decoration: underline;
+  background-color: hsla(0, 75%, 50%, 1);
+}
+
+@media screen and (min-width: 48.75rem) {
+  .container {
+    flex-direction: row;
+  } 
+
+  .container li a {
+    padding: 1.5rem 2rem;
+
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
+}

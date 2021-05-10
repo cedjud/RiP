@@ -1,0 +1,19 @@
+.wrapper {
+  margin-top: auto;
+  height: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0 var(--padding-x);
+  flex: var(--header-height) 0 0;
+}
+
+.container {
+  border-top: 1px solid hsla(0, 0%, 80%, 1);
+  display: flex;
+
+  flex: 1;
+  justify-content: center;
+  max-width: var(--container-max-width);
+}
+

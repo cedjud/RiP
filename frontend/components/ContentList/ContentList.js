@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { wrapper, container } from './ContentList.module.css';
+
 import Link from 'next/link';
 
 const getPath = (content) => {
@@ -22,7 +24,7 @@ const getPath = (content) => {
 function ContentList({content}) {
   return (
     <section>
-      <ul>
+      <ul className={container}>
         {content && Array.isArray(content) && content.map(content => {
           const {_id, _type, description, title, plainTextBody } = content;
 

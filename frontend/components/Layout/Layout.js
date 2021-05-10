@@ -1,9 +1,10 @@
 import Head from "next/head";
-import {wrapper} from "./Layout.module.css";
+import {wrapper, hero} from "./Layout.module.css";
 
 import PageHeader from "../PageHeader/PageHeader";
+import PageFooter from '../Footer/Footer';
 
-function Layout({ children }) {
+function Layout({ children, title, introtext }) {
   return (
     <>
       <Head>
@@ -13,8 +14,17 @@ function Layout({ children }) {
 
       <PageHeader />
       <main className={wrapper}>
-        {children}
+        <section className={hero}>
+          <h1>{title}</h1>
+          {introtext && <p>{introtext}</p>} 
+        </section>
+
+        <section>
+          {children}
+        </section>
       </main>
+      
+      <PageFooter />
     </>
   );
 }

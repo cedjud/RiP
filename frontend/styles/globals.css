@@ -10,11 +10,25 @@ body {
 }
 
 html,
-body,
-#__next {
+body {
   max-width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
   height: 100%;
+}
+
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: stretch;
+  min-height: 100%;
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background-color: hsla(0, 100%, 100%, 1);
 }
 
 a {
@@ -32,7 +46,14 @@ h3,
 h4,
 h5,
 h6 {
+  margin-top: 0;
   font-family: Lora;
+  line-height: 1.15;
+  margin-bottom: .5em;
+}
+
+h1 {
+  font-size: 3rem;
 }
 
 p,
@@ -45,10 +66,17 @@ input {
   font-size: 1.125rem;
 }
 
+p {
+  font-weight: 300;
+  line-height: 1.4;
+}
+
 :root {
   --header-height: 4rem;
   --padding-x: 1rem;
-  --padding-y: 1rem;
+  --padding-y: 2rem;
+  --container-max-width: 64rem;
+  --body-text-max-width: 40rem;
 }
 
 ul {
@@ -64,4 +92,12 @@ button {
   background: transparent;
   padding: 0;
   margin: 0;
+}
+
+@media screen and (min-width: 48.75rem) {
+  :root {
+    --header-height: 5rem;
+    --padding-x: 1rem;
+    --padding-y: 3rem;
+  }
 }

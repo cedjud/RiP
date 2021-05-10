@@ -2,6 +2,7 @@ import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '../../sanityClient';
 
 import Layout from '../../components/Layout/Layout';
+import { body } from '../../styles/ArticlePage.module.css';
 
 
 export async function getStaticPaths() {
@@ -33,13 +34,12 @@ export async function getStaticProps({ params }) {
 }
 
 function Article({ articleData }) {
-  console.log('articleData : ', articleData);
+  // console.log('articleData : ', articleData);
   const { title } = articleData;
 
   return (
-    <Layout>
-      <h1>{title}</h1>
-      <BlockContent blocks={articleData.body} />
+    <Layout title={title}>
+      <BlockContent blocks={articleData.body} className={body}/>
     </Layout>
   )
 }

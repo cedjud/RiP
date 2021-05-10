@@ -15,11 +15,8 @@ export async function getStaticProps() {
 
 function Categories({ content }) {
   return (
-    <Layout>
-      <main>
-        <h1>Kategorier:</h1>
-        <ContentList content={content} />
-      </main>
+    <Layout title={'Kategorier'}>
+      <ContentList content={content} />
     </Layout>
   )
 }
