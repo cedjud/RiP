@@ -18,3 +18,4 @@ export default () =>
       ...S.documentTypeListItems()
         .filter(listItem => !['frontpage'].includes(listItem.getId()))
     ])
+    

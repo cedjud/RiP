@@ -5,6 +5,7 @@ import Layout from '../components/Layout/Layout';
 
 export async function getStaticProps() {
   const content = await sanityClient.fetch(`*[_type== 'category' && displayOnFrontPage == true]`)
+  const frontpage = await sanityClient.fetch(`*[_type== 'frontpage']`)
 
   // const ct = data.reduce((acc, current) =>  {
   //   const type = current._type;
@@ -19,7 +20,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      content 
+      content,
+      frontpage
     }
   }
 }
