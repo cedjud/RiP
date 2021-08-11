@@ -15,7 +15,7 @@ export async function getStaticProps() {
 
 function Articles({ content }) {
   return (
-    <Layout title="Artikler:">
+    <Layout title="Alle Artikler:">
       <ContentList content={content} />
     </Layout>
   )

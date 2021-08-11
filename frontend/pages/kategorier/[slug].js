@@ -49,24 +49,14 @@ export async function getStaticProps({ params }) {
 
 function Category({ categoryData, articleData }) {
   const { title, subcategories } = categoryData;
-  // console.log('subcategories : ', subcategories);
-  // console.log('articleData : ', articleData);
-
   return (
     <Layout title={title}>
       {subcategories && (
-        <>
-          {/* <h3>Underkategorier:</h3> */}
-          <CategoryGrid categories={subcategories} />
-          {/* <ContentList content={subCategories} /> */}
-        </>
+        <CategoryGrid categories={subcategories} classNames={`mb-8`} heading={`Relaterte kategorier:`} />
       )}
 
       {articleData && Array.isArray(articleData) && articleData.length > 0 && (
-        <>
-          <h3>Artikler:</h3>
-          <ContentList content={articleData} />
-        </>
+        <ContentList content={articleData} heading={`Artikler:`} />
       )}
     </Layout>
   );

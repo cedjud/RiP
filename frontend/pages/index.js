@@ -32,7 +32,7 @@ export default function Home({ content }) {
       title="Rettigheter i Psykiatri"
       introtext="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tristique velit sed purus laoreet, vitae ultricies tellus porttitor. Donec ac sagittis quam, eu lacinia sem. Praesent venenatis accumsan eros a scelerisque. Etiam dapibus vitae diam a imperdiet. Nulla maximus luctus accumsan."
     >
-      <CategoryGrid categories={content}/>
+      <CategoryGrid categories={content} heading={`Kategorier:`} />
     </Layout>
   )
 }

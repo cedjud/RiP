@@ -1,6 +1,7 @@
 import sanityClient from "../../sanityClient";
 
 import ContentList from '../../components/ContentList/ContentList';
+import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import Layout from '../../components/Layout/Layout';
 
 export async function getStaticProps() {
@@ -15,8 +16,8 @@ export async function getStaticProps() {
 
 function Categories({ content }) {
   return (
-    <Layout title={'Kategorier'}>
-      <ContentList content={content} />
+    <Layout title={'Alle Kategorier:'}>
+      <CategoryGrid categories={content} />
     </Layout>
   )
 }

@@ -1,4 +1,11 @@
-.container button {
+.navigation {
+  height: calc(100vh - theme('spacing.7'));
+}
+
+.listItem {
+  @apply inline-block underline hover:no-underline text-4xl mb-8;
+}
+/* .container button {
   width: 2rem;
   height: 2rem;
 
@@ -26,7 +33,6 @@
 
   transition: transform 250ms, opacity 250ms;
   pointer-events: none;
-  /* max-width: var(--container-max-width); */
 }
 
 .navigation ul {
@@ -62,4 +68,4 @@
   .navigation {
     transform: translate3d(0%, 0, 0);
   }
-}
+} */

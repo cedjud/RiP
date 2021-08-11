@@ -12,14 +12,14 @@ import {
 function PageHeader() {
   return (
     <header 
-      className={wrapper}
+      className="container mx-auto px-4 h-16 sm:h-20 flex-none flex items-center justify-between border-b"
       role="banner"
     >
-      <div className={container}>
+      {/* <div className="flex items-center justify-between"> */}
         <Logo /> 
         {/* <Search /> */}
         <SiteNavigation />
-      </div>
+      {/* </div> */}
     </header>
   )
 }

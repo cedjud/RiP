@@ -1,3 +1,7 @@
-.body {
-  max-width: var(--body-text-max-width);
+.body p {
+  @apply mb-3;
+}
+
+.body ul {
+  @apply pl-4 mb-4;
 }

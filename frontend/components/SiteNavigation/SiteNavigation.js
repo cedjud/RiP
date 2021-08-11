@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CgMenuRight, CgClose } from "react-icons/cg";
 import classNames from 'classnames';
 
-import { container, navigation, navigationVisible } from './SiteNavigation.module.css';
+import { container, navigation, navigationVisible, listItem } from './SiteNavigation.module.css';
 
 function SiteNavigation() {
   const [visible, setVisible] = useState(false);
@@ -11,6 +11,7 @@ function SiteNavigation() {
   return (
     <div className={container}>
       <button
+        className={`text-3xl text-red-900 hover:text-red-800`}
         aria-label="meny"
         onClick={() => {
           setVisible(!visible);
@@ -19,29 +20,29 @@ function SiteNavigation() {
         {visible ? <CgClose /> : <CgMenuRight />}
       </button>
 
-      <nav className={`${navigation} ${visible ? navigationVisible : ''}`}>
-        <ul>
+      <nav className={`absolute ${visible ? '': 'hidden'} top-16 sm:top-20 right-0 w-screen h-screen bg-white ${navigation}`}>
+        <ul className={`container mx-auto py-8 px-4`}>
           <li>
             <Link href="/artikler">
-              <a>Alle artikler</a>
+              <a className={listItem}>Alle artikler</a>
             </Link>
           </li>
 
           <li>
             <Link href="/kategorier">
-              <a>Alle kategorier</a>
+              <a className={listItem}>Alle kategorier</a>
             </Link>
           </li>
 
           <li>
             <Link href="/">
-              <a>Om</a>
+              <a className={listItem}>Om</a>
             </Link>
           </li>
 
           <li>
             <Link href="/">
-              <a>Kontakt</a>
+              <a className={listItem}>Kontakt</a>
             </Link>
           </li>
         </ul>
