@@ -1,20 +1,28 @@
-import sanityClient from "../../sanityClient";
+import { usePreviewSubscription } from "../../lib/sanity";
+import { getClient } from "../../lib/sanity.server";
 
-import ContentList from '../../components/ContentList/ContentList';
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import Layout from '../../components/Layout/Layout';
 
-export async function getStaticProps() {
-  const content = await sanityClient.fetch(`*[_type == 'category']`)
+const query = `*[_type == 'category']`;
+
+export async function getStaticProps(preview = false) {
+  const content = await getClient(true).fetch(query)
 
   return {
     props: {
-      content 
+      data: { content },
+      preview
     }
   }
 }
 
-function Categories({ content }) {
+function Categories({ data, preview }) {
+  const {data: content} = usePreviewSubscription(query, {
+    initialData: data.content,
+    enabled: preview
+  })
+
   return (
     <Layout title={'Alle Kategorier:'}>
       <CategoryGrid categories={content} />

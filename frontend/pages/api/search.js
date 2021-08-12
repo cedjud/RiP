@@ -1,4 +1,4 @@
-import sanityClient from "../../sanityClient";
+import { sanityClient } from "../../lib/sanity.server";
 
 export async function getStaticProps() {
   const content = await sanityClient.fetch(`*[_type == 'article']`)

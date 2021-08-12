@@ -1,5 +1,5 @@
 const category = {
-  title: "Category",
+  title: "Kategori",
   name: "category",
   type: "document",
   fields: [

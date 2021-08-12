@@ -1,19 +1,28 @@
-import sanityClient from "../../sanityClient";
+import { usePreviewSubscription } from "../../lib/sanity";
+import { getClient } from "../../lib/sanity.server";
 
 import ContentList from '../../components/ContentList/ContentList';
 import Layout from '../../components/Layout/Layout';
 
-export async function getStaticProps() {
-  const content = await sanityClient.fetch(`*[_type == 'article']{..., 'plainTextBody': pt::text(body)}`)
+const query = `*[_type == 'article']{..., 'plainTextBody': pt::text(body)}`;
+
+export async function getStaticProps({preview = false}) {
+  const content = await getClient(preview).fetch(query);
 
   return {
     props: {
-      content 
+      data: {content },
+      preview,
     }
   }
 }
 
-function Articles({ content }) {
+function Articles({ data, preview }) {
+  const { data: content} = usePreviewSubscription(query, {
+    initialData: data.content,
+    enabled: preview
+  });
+
   return (
     <Layout title="Alle Artikler:">
       <ContentList content={content} />

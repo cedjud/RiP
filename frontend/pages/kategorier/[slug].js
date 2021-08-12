@@ -1,13 +1,34 @@
+import { getClient } from "../../lib/sanity.server";
+import { usePreviewSubscription } from "../../lib/sanity";
+
 import ContentList from "../../components/ContentList/ContentList";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import Layout from "../../components/Layout/Layout";
 
-import sanityClient from "../../sanityClient";
+const pathsQuery = `*[_type == 'category']{
+  slug
+}`;
+
+const categoryQuery = `*[_type == 'category' && slug.current == $slug][0]{
+    _id,
+    title,
+    slug, 
+    subcategories[]->{
+      _id,
+      _type,
+      title,
+      description,
+      slug
+    }
+  }`;
+
+const articlesQuery = `*[_type == 'article' && $id in categories[]._ref]{
+    ...,
+    "plainTextBody": pt::text(body)
+  }`;
 
 export async function getStaticPaths() {
-  const categories = await sanityClient.fetch(`*[_type == 'category']{
-    slug
-  }`);
+  const categories = await getClient(false).fetch(pathsQuery);
 
   const paths = categories.map((category) => {
     return `/kategorier/${category.slug.current}`;
@@ -19,40 +40,39 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
-  const categoryQuery = `*[_type == 'category' && slug.current == '${params.slug}'][0]{
-    _id,
-    title,
-    subcategories[]->{
-      _id,
-      _type,
-      title,
-      description,
-      slug
-    }
-  }`;
-  const categoryData = await sanityClient.fetch(categoryQuery);
+export async function getStaticProps({ params, preview = false }) {
+  const categoryData = await getClient(preview).fetch(categoryQuery, {
+    slug: params.slug,
+  });
 
-  const articlesQuery = `*[_type == 'article' && '${categoryData._id}' in categories[]._ref]{
-    ...,
-    "plainTextBody": pt::text(body)
-  }`;
-  const articleData = await sanityClient.fetch(articlesQuery);
+  const articleData = await getClient(false).fetch(articlesQuery, {
+    id: categoryData._id,
+  });
 
   return {
     props: {
-      categoryData,
+      data: { categoryData },
       articleData,
+      preview
     },
   };
 }
 
-function Category({ categoryData, articleData }) {
-  const { title, subcategories } = categoryData;
+function Category({ data, articleData, preview }) {
+  const { data: categoryData } = usePreviewSubscription(categoryQuery, {
+    params: { slug: data.categoryData?.slug.current },
+    initialData: data.categoryData,
+    enabled: preview && data.categoryData?.slug.current,
+  });
+
   return (
-    <Layout title={title}>
-      {subcategories && (
-        <CategoryGrid categories={subcategories} classNames={`mb-8`} heading={`Relaterte kategorier:`} />
+    <Layout title={categoryData?.title}>
+      {categoryData?.subcategories && (
+        <CategoryGrid
+          categories={categoryData?.subcategories}
+          classNames={`mb-8`}
+          heading={`Relaterte kategorier:`}
+        />
       )}
 
       {articleData && Array.isArray(articleData) && articleData.length > 0 && (

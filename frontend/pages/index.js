@@ -1,38 +1,39 @@
-import sanityClient from "../sanityClient";
+import { useEffect } from "react";
+import { usePreviewSubscription } from "../lib/sanity";
+import { getClient } from "../lib/sanity.server";
 
-import CategoryGrid from '../components/CategoryGrid/CategoryGrid';
-import Layout from '../components/Layout/Layout';
+import CategoryGrid from "../components/CategoryGrid/CategoryGrid";
+import Layout from "../components/Layout/Layout";
 
-export async function getStaticProps() {
-  const content = await sanityClient.fetch(`*[_type== 'category' && displayOnFrontPage == true]`)
-  const frontpage = await sanityClient.fetch(`*[_type== 'frontpage']`)
+const frontpageQuery = `*[_id == 'frontpage'][0]`;
+const categoriesQuery = `*[_type== 'category' && displayOnFrontPage == true]`;
 
-  // const ct = data.reduce((acc, current) =>  {
-  //   const type = current._type;
-
-  //   if (!Array.isArray(acc[type])) {
-  //     acc[type] = [];
-  //   }
-  //   acc[type].push(current);
-
-  //   return acc;
-  // }, {})
+export async function getStaticProps(preview = false) {
+  const frontpageContent = await getClient(preview).fetch(frontpageQuery);
+  const categoryData = await getClient(false).fetch(categoriesQuery);
 
   return {
     props: {
-      content,
-      frontpage
-    }
-  }
+      data: { frontpageContent },
+      categoryData,
+      preview
+    },
+  };
 }
 
-export default function Home({ content }) {
+export default function Home({ categoryData, data, preview }) {
+  const { data: frontpageContent } = usePreviewSubscription(frontpageQuery, {
+    initialData: data.frontpage,
+    enabled: preview,
+  });
+
   return (
-    <Layout 
-      title="Rettigheter i Psykiatri"
-      introtext="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tristique velit sed purus laoreet, vitae ultricies tellus porttitor. Donec ac sagittis quam, eu lacinia sem. Praesent venenatis accumsan eros a scelerisque. Etiam dapibus vitae diam a imperdiet. Nulla maximus luctus accumsan."
+    <Layout
+      title={frontpageContent?.title}
+      introtext={frontpageContent?.body}
+      richtextIntro
     >
-      <CategoryGrid categories={content} heading={`Kategorier:`} />
+      <CategoryGrid categories={categoryData} heading={`Kategorier:`} />
     </Layout>
-  )
+  );
 }

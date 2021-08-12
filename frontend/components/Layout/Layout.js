@@ -1,10 +1,11 @@
+import BlockContent from '@sanity/block-content-to-react';
 import Head from "next/head";
 import {wrapper, hero} from "./Layout.module.css";
 
 import PageHeader from "../PageHeader/PageHeader";
 import PageFooter from '../Footer/Footer';
 
-function Layout({ children, title, introtext, classNames }) {
+function Layout({ children, title, introtext, richtextIntro, classNames }) {
   return (
     <>
       <Head>
@@ -17,7 +18,8 @@ function Layout({ children, title, introtext, classNames }) {
       <main className={`container mx-auto flex-1 p-4`}>
         <section className={``}>
           <h1 className={`text-3xl mt-4 mb-4`}>{title}</h1>
-          {introtext && <p className={`max-w-3xl`}>{introtext}</p>} 
+          {introtext && richtextIntro ? <BlockContent blocks={introtext} /> :
+           <p className={`max-w-3xl`}>{introtext}</p>} 
         </section>
 
         <section>
