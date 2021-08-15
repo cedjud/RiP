@@ -24,7 +24,7 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params, preview }) {
+export async function getStaticProps({ params, preview = false }) {
   const articleData = await getClient(preview).fetch(contentQuery, {
     slug: params.slug
   });

@@ -8,23 +8,25 @@ import Layout from "../components/Layout/Layout";
 const frontpageQuery = `*[_id == 'frontpage'][0]`;
 const categoriesQuery = `*[_type== 'category' && displayOnFrontPage == true]`;
 
-export async function getStaticProps(preview = false) {
+export async function getStaticProps({preview = false}) {
   const frontpageContent = await getClient(preview).fetch(frontpageQuery);
   const categoryData = await getClient(false).fetch(categoriesQuery);
 
   return {
     props: {
-      data: { frontpageContent },
-      categoryData,
-      preview
+      data: { 
+        frontpageContent,
+        categoryData,
+        previewMode: preview
+      },
     },
   };
 }
 
-export default function Home({ categoryData, data, preview }) {
+export default function Home({ data }) {
   const { data: frontpageContent } = usePreviewSubscription(frontpageQuery, {
-    initialData: data.frontpage,
-    enabled: preview,
+    initialData: data.frontpageContent,
+    enabled: data.previewMode,
   });
 
   return (
@@ -33,7 +35,7 @@ export default function Home({ categoryData, data, preview }) {
       introtext={frontpageContent?.body}
       richtextIntro
     >
-      <CategoryGrid categories={categoryData} heading={`Kategorier:`} />
+      <CategoryGrid categories={data?.categoryData} heading={`Kategorier:`} />
     </Layout>
   );
 }

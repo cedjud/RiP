@@ -6,13 +6,15 @@ import Layout from '../../components/Layout/Layout';
 
 const query = `*[_type == 'category']`;
 
-export async function getStaticProps(preview = false) {
-  const content = await getClient(true).fetch(query)
+export async function getStaticProps({preview = false}) {
+  const content = await getClient(preview).fetch(query)
 
   return {
     props: {
-      data: { content },
-      preview
+      data: { 
+        content,
+      },
+      preview: preview
     }
   }
 }
