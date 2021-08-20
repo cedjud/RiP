@@ -10,7 +10,7 @@ function Logo() {
           <circle className={`fill-red-900 hover:fill-red-800`} cx="32" cy="32" r="32"/>
         </svg>
         <span className={`ml-3`}>
-          <span className={``}>Rettigherter</span>
+          <span className={``}>Rettigheter</span>
           <br />
           <span className={`italic`}>i Psykiatrien</span>
         </span>
