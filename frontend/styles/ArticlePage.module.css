@@ -5,3 +5,7 @@
 .body ul {
   @apply pl-4 mb-4;
 }
+
+.body a {
+  @apply text-red-700 underline;
+}
