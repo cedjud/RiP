@@ -7,9 +7,13 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 // Documents
 import article from './documents/article';
 import category from './documents/category';
+import definition from './documents/definition';
 
 // Singletons
+import about from './singletons/about';
+import contact from './singletons/contact';
 import frontpage from './singletons/frontpage';
+import settings from './singletons/settings';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -21,8 +25,13 @@ export default createSchema({
     /* documents */
     article,
     category,
+    definition,
 
     /* singletons */
-    frontpage
+    frontpage,
+    about,
+    contact,
+    settings
+
   ]),
 })

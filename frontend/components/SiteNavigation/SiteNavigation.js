@@ -35,13 +35,13 @@ function SiteNavigation() {
           </li>
 
           <li>
-            <Link href="/">
+            <Link href="/om">
               <a className={listItem}>Om</a>
             </Link>
           </li>
 
           <li>
-            <Link href="/">
+            <Link href="/kontakt">
               <a className={listItem}>Kontakt</a>
             </Link>
           </li>

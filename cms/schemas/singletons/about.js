@@ -1,6 +1,6 @@
-const frontpage = {
-  title: "Forside",
-  name: "frontpage",
+const about = {
+  title: "Om",
+  name: "about",
   type: "document",
   // __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'], 
   fields: [
@@ -13,6 +13,9 @@ const frontpage = {
       title: 'Slug',
       name: 'slug',
       type: 'slug',
+      options: {
+        source: 'title',
+      }
     },
     {
       title: 'Intro', 
@@ -23,4 +26,4 @@ const frontpage = {
   ],
 };
 
-export default frontpage;
+export default about;
